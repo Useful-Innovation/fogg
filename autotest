@@ -1,0 +1,6 @@
+while :;
+do
+clear;
+./vendor/bin/phpunit --colors --coverage-html test-coverage --bootstrap ./tests/bootstrap.php tests
+sleep 2
+done

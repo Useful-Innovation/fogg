@@ -1,0 +1,15 @@
+{
+  "name": "gobrave/fogg",
+  "repositories": [ { "type": "composer", "url": "http://satis.goingbrave.se" } ],
+  "require-dev": {
+    "phpunit/phpunit": "4.0.*"
+  },
+  "require" : {
+    "gobrave/util" : "1.3.1"
+  },
+  "autoload" : {
+    "psr-4" : {
+      "GoBrave\\Fogg\\" : "./src"
+    }
+  }
+}
