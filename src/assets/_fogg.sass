@@ -1,0 +1,138 @@
+.fogg-wrap
+
+  .link-list
+    li
+      float: left
+      margin: 5px
+      a
+        text-align: center
+        display: block
+        background: white
+        padding: 5px 15px
+        width: 200px
+        border: 1px solid #ccc
+        text-decoration: none
+        &:hover
+          background: #f0f0f0
+
+  .splitter
+    +clearfix
+    .postbox
+      float: left
+      box-sizing: border-box
+      &:last-child
+        margin-right: 0 !important
+    &.splitter-two
+      .postbox
+        margin-right: 30px
+        width: 45%
+        width: calc(50% - 15px)
+    &.splitter-three
+      .postbox
+        margin-right: 30px
+        width: 30%
+        width: calc(33.3333% - 20px)
+
+  .fogg-messages
+    .fogg-message
+      border-width: 1px
+      border-style: solid
+      padding: 10px 15px 10px 15px
+      &.fogg-message-alert
+        background: #FFEBE8
+        border-color: #cc0000
+      &.fogg-message-notice
+        background: #ffffe0
+        border-color: #e6db55
+
+  .button.delete
+    $bg : #E87474
+    background: $bg
+    border-color: darken($bg, 15%)
+    color: white
+    font-weight: normal
+    &:hover
+      background: darken($bg, 5%)
+      border-color: darken($bg, 20%)
+      color: white
+
+
+  .button
+    box-shadow: inset 0 1px 0 rgba(120,200,230,.5),0 1px 0 rgba(0,0,0,.15)
+
+  .postbox
+    h3
+      background: black
+      color: white
+      cursor: default
+      font-weight: normal
+      border-bottom: rgb(238,238,238)
+    .text-field
+      input[type=text]
+        width: 100%
+    .select-field
+      select
+        width: 100%
+    .media-field
+      figure
+        width: 250px
+        text-align: center
+        margin: 0 0 10px 0
+        padding: 10px
+        border: 1px solid #eee
+        background: #fafafa
+        line-height: 0
+        img
+          max-width: 250px
+          max-height: 250px
+          line-height: 0
+    .textarea-field
+      textarea
+        width: 100%
+        min-height: 100px
+
+  .translatable-container
+    $bg : #F7F7F7
+    .translatable-tabs
+      $height : 30px
+      height: $height
+      margin-bottom: 0
+      li
+        float: left
+        margin-bottom: 0
+        height: $height - 1
+        a
+          display: block
+          width: 100px
+          height: inherit
+          line-height: $height
+          text-align: center
+          background: darken($bg, 5%)
+          border-left: 1px solid darken($bg, 10%)
+          border-top: 1px solid darken($bg, 10%)
+          border-bottom: 1px solid darken($bg, 10%)
+          text-decoration: none
+          outline: none
+          color: black
+          box-shadow: inset 0 -1px 1px #c5c5c5
+        &:last-child a
+          border-right: 1px solid darken($bg, 10%)
+        &.active
+          height: $height
+          a
+            background: $bg
+            border-bottom: none
+            color: black
+            box-shadow: none
+            font-weight: bold
+
+    .translatable-inside
+      background: $bg
+      border: 1px solid darken($bg, 10%)
+      padding: 20px 10px 0 10px
+
+  #product-positions-table
+    th, tbody td, tbody td input
+      text-align: center
+    input
+      width: 40px
