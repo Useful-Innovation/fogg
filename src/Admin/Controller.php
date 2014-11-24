@@ -17,10 +17,11 @@ class Controller extends System
   protected function redirect($name, $id = null) {
     $path = explode('.', $name);
 
-    $query = '?page=' . $path[0] . '&fogg-' . $path[1] . '1';
+    $query = '?page=' . $path[0] . '&fogg-' . $path[1] . '=1';
     if($path[1] == 'edit') {
       $query .= '&fogg-id=' . $id;
     }
     header('Location: ' . $query);
+    exit;
   }
 }
