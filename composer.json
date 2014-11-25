@@ -5,7 +5,7 @@
     "phpunit/phpunit": "4.0.*"
   },
   "require" : {
-    "gobrave/util" : "1.4.2"
+    "gobrave/util" : "~1.5"
   },
   "autoload" : {
     "psr-4" : {

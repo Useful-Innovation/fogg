@@ -4,7 +4,7 @@
     <p>
       <button class="button button-primary" type="submit">Spara</button>
       <?php if($route->isEdit()) : ?>
-        <a class="button delete <?= $route::TYPE_DELETE; ?>" href="?page=<?php echo $_GET['page']; ?>&<?= $route::TYPE_DELETE; ?>=<?php echo $model->id; ?>">Ta bort</a>
+        <a class="button delete <?= $route::TYPE_DELETE; ?>" href="?page=<?php echo $_GET['page']; ?>&<?= $route::TYPE_DELETE; ?>=<?= $model->id; ?>">Ta bort</a>
       <?php endif; ?>
     </p>
   <?php endif; ?>
