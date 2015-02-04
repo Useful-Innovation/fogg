@@ -1,0 +1,18 @@
+{
+  "admin" : [
+    {
+      "resource" : "fogg",
+      "plural"   : "Fogg",
+      "singular" : "Fogg",
+      "prefix"   : "Ny"
+    }
+  ],
+  "public" : {
+    "/foggs" : {
+      "name"       : "foggs",
+      "type"       : "GET",
+      "controller" : "FoggssController",
+      "method"     : "foggs"
+    }
+  }
+}

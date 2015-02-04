@@ -3,6 +3,7 @@
 use GoBrave\Util\Renderer;
 use GoBrave\Util\SingPlur;
 use GoBrave\Util\CaseConverter;
+use WP_CLI;
 
 /**
  * Fogg Generator. Generates classes and views for Fogg
@@ -18,7 +19,7 @@ class WPCLI
    */
   public function controller($positional, $assoc) {
     $this->runGenerator('controller', $assoc);
-    \WP_CLI::success('Controller ' . $assoc['name'] . ' generated');
+    WP_CLI::success('Controller ' . $assoc['name'] . ' generated');
   }
 
 
@@ -29,7 +30,7 @@ class WPCLI
    */
   public function model($positional, $assoc) {
     $this->runGenerator('model', $assoc);
-    \WP_CLI::success('Model ' . $assoc['name'] . ' generated');
+    WP_CLI::success('Model ' . $assoc['name'] . ' generated');
   }
 
 
@@ -41,7 +42,7 @@ class WPCLI
    */
   public function views($positional, $assoc) {
     $this->runGenerator('views', $assoc);
-    \WP_CLI::success('Views for ' . $assoc['name'] . ' generated');
+    WP_CLI::success('Views for ' . $assoc['name'] . ' generated');
   }
 
 
@@ -61,6 +62,31 @@ class WPCLI
 
 
 
+  /**
+   * Setup Front and AdminController + Model and routes
+   * @synopsis [--force]
+   */
+  public function setup($positional, $assoc) {
+    $config = $this->getConfig();
+    system('mkdir -p ' . $config->rootPath() . '/System');
+    system('cp ' . __DIR__ . '/files/*.php ' . $config->rootPath() . '/System/');
+    system('cp ' . __DIR__ . '/files/routes.json ' . $config->rootPath() . '/');
+  }
+
+
+
+
+  /**
+   * Outputs an example config for functions.php
+   */
+  public function config($positional, $assoc) {
+    WP_CLI::log(PHP_EOL . file_get_contents(__DIR__ . '/templates/config.tpl'));
+    WP_CLI::success('Put this config in functions.php');
+  }
+
+
+
+
   //
   //    Helpers
   //
@@ -69,15 +95,15 @@ class WPCLI
     try {
       $generator->{$method}($assoc['name'], (bool)@$assoc['translatable'], (bool)@$assoc['force']);
     } catch (FileAlreadyExistsException $e) {
-      \WP_CLI::error($e->getMessage());
+      WP_CLI::error($e->getMessage());
     }
   }
 
   private function generator() {
-    return new Generator($this->config(), $this->renderer(), new SingPlur(), new CaseConverter());
+    return new Generator($this->getConfig(), $this->renderer(), new SingPlur(), new CaseConverter());
   }
 
-  private function config() {
+  private function getConfig() {
     global $fogg;
     return $fogg->config();
   }

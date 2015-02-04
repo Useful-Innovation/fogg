@@ -4,7 +4,7 @@ use GoBrave\Util\IWP;
 use GoBrave\Util\Collection;
 use GoBrave\Util\CaseConverter;
 use GoBrave\Util\Renderer;
-use GoBrave\CropMode;
+use GoBrave\Util\CropMode;
 
 class Fogg
 {
