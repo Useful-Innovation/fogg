@@ -12,7 +12,8 @@
     "phpunit/phpunit": "4.0.*"
   },
   "require" : {
-    "gobrave/util" : "~1.5"
+    "gobrave/util"        : "~1.5",
+    "illuminate/database" : "~4.2"
   },
   "autoload" : {
     "psr-4" : {
