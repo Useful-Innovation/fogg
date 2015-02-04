@@ -19,4 +19,14 @@ class Model extends Eloquent
       self::$singplur= new SingPlur();
     }
   }
+
+  public function t($field, $language = null) {
+    if(method_exists($this, 'translate')) {
+      return $this->translate($field, $language);
+    }
+    if(method_exists($this, $field)) {
+      return $this->{$field}();
+    }
+    return $this->{$field};
+  }
 }
