@@ -26,9 +26,9 @@ $capsule->bootEloquent();
 //
 $fogg = new GoBrave\Fogg\Fogg(
   new GoBrave\Fogg\Config([
-    'routes'            => GR_APP_PATH . '/Api/routes.json',
-    'base_namespace'    => 'App\Api',
-    'root_path'         => GR_APP_PATH . '/Api',
+    'routes'            => GR_APP_PATH . '/Fogg/routes.json',
+    'base_namespace'    => 'App\Fogg',
+    'root_path'         => GR_APP_PATH . '/Fogg',
     'admin_page_name'   => 'Fogg',
     'controller_suffix' => 'Controller',
     'views_path'        => GR_APP_PATH  . '/templates/api'
