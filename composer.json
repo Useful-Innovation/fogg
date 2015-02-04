@@ -10,6 +10,9 @@
   "autoload" : {
     "psr-4" : {
       "GoBrave\\Fogg\\" : "./src"
-    }
+    },
+    "files" : [
+      "src/helpers.php"
+    ]
   }
 }
