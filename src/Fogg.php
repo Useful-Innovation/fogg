@@ -20,7 +20,12 @@ class Fogg
     $this->renderer       = $renderer;
 
     if($this->wp->is_admin()) {
-      $this->wp->wp_register_script('fogg', $this->wp->get_bloginfo('template_url').'/../fogg/assets/fogg.js', false, false, true);
+      $this->wp->wp_register_script('fogg', 
+        $this->wp->get_bloginfo('template_url') . '/../vendor/gobrave/fogg/src/assets/fogg.js',
+        false,
+        false,
+        true
+      );
       $this->wp->wp_enqueue_script ('fogg');
     }
 
