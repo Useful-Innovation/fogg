@@ -1,7 +1,7 @@
 <div class="wrap fogg-wrap">
   <h2>
     <?php if($route->isEdit()) : ?>
-      Redigerar 
+      Redigerar <?= $model->t('title'); ?>
     <?php elseif($route->isCreate()) : ?>
       <?= $route->resource()->prefix; ?> <?= $route->resource()->singular; ?>
     <?php else : ?>

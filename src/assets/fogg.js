@@ -6,7 +6,7 @@
 //      Translatable
 //
 //
-$.fn.translatable = function() {
+$.fn.foggTranslatable = function() {
   var items = $(this);
 
   items.find('.translatable').hide();
@@ -43,7 +43,7 @@ $.fn.translatable = function() {
 //      Prevent accidental deletion
 //
 //
-$.fn.onDelete = function() {
+$.fn.foggOnDelete = function() {
   return $(this).each(function() {
     $(this).on('click', function(e) {
       if(!confirm('Är du säker?')) {
@@ -58,7 +58,7 @@ $.fn.onDelete = function() {
 //      Even height
 //
 //
-$.fn.evenHeight = function() {
+$.fn.foggEvenHeight = function() {
 
   var items = $(this);
 
@@ -84,17 +84,21 @@ $.fn.evenHeight = function() {
 //        Media Field
 //
 //
-$.fn.mediaField = function() {
-  var items = $(this);
-
-  var methods = {
+$.fn.foggMediaField = function() {
+  var items        = $(this);
+  var methods      = {
     onChooseMedia : function(e) {
-      var self  = this;
-      var field = $(e.target).closest('.media-field');
-      var type  = field.data('type');
-
-      wp.media.editor.send.attachment = function(props, attachment){
-        self.types[type].set(field, attachment);
+      var self         = this;
+      var field        = $(e.target).closest('.media-field');
+      var type         = field.data('type');
+      var original     = wp.media.editor.send.attachment;
+      var custom_media = true;
+      wp.media.editor.send.attachment = function(props, attachment) {
+        if (custom_media === true) {
+          self.types[type].set(field, attachment);
+          custom_media = false;
+        }
+        return original.apply( this, [props, attachment] );
       };
 
       wp.media.editor.open($(e.target));
@@ -110,20 +114,36 @@ $.fn.mediaField = function() {
     types : {
       image : {
         set : function(field, attachment) {
+          var url;
+          if(attachment.sizes.thumbnail) {
+            url = attachment.sizes.thumbnail.url;
+          } else {
+            url = attachment.url;
+          }
           field.find('.value-field').val(attachment.id);
-          field.find('img').attr('src', attachment.url);
+          field.find('img').attr('src', url);
         },
         remove : function(field) {
           field.find('.value-field').val('');
           field.find('img').attr('src', '');
         }
+      },
+      file : {
+        set : function(field, attachment) {
+          field.find('.value-field').val(attachment.id);
+          field.find('a').attr('href', attachment.url).html(attachment.filename);
+        },
+        remove : function(field) {
+          field.find('.value-field').val('');
+          field.find('a').attr('href', '').html('');
+        }
       }
     }
   };
 
-  return items.each(function() {
-    $(this).find('.api-choose-media').on('click', function(e) {e.preventDefault(); methods.onChooseMedia(e); });
-    $(this).find('.api-remove-media').on('click', function(e) {e.preventDefault(); methods.onRemoveMedia(e); });
+  return items.closest('.field').each(function() {
+    $(this).on('click', '.fogg-choose-media', function(e) {e.preventDefault(); methods.onChooseMedia(e); });
+    $(this).on('click', '.fogg-remove-media', function(e) {e.preventDefault(); methods.onRemoveMedia(e); });
   });
 };
 
@@ -134,7 +154,7 @@ $.fn.mediaField = function() {
 //    Works on checkbox-fields
 //
 //
-$.fn.marker = function() {
+$.fn.foggMarker = function() {
   var links = $(this);
 
   return links.each(function() {
@@ -150,13 +170,123 @@ $.fn.marker = function() {
 
 
 
+
+
+//
+//
+//    Duplicate
+//
+//
+$.fn.foggDuplicate = function() {
+  return $(this).each(function() {
+    var field = $(this);
+
+    field.on('click', 'button.duplicate', function(e) {
+      e.preventDefault();
+
+      var button = $(e.target);
+      var field  = button.closest('.duplicatable-field');
+      var html   = field.find('.fogg-template').html();
+
+      field.find('.groups').append(html);
+      setPositions(field);
+    });
+
+    field.on('click', 'button.remove-group', function(e) {
+      e.preventDefault();
+
+      var button = $(e.target);
+      var group  = button.closest('.group');
+      group.remove();
+    });
+
+    function setPositions(field) {
+      field.find('.group').each(function(i) {
+        $(this).find('input,select,textarea').each(function() {
+          $(this).attr('name', $(this).attr('name').replace('[]', '[' + i + ']'));
+        });
+      });
+    }
+
+    setPositions(field);
+  });
+};
+
+
+
+
+
+//
+//
+//    Duplicate
+//
+//
+$.fn.foggAutoComplete = function() {
+  return $(this).each(function() {
+    var field      = $(this);
+    var data       = $.trim(field.find('.autocomplete-data').html());
+    var data       = JSON.parse(data);
+    var input      = field.find('.autocomplete-input');
+    var list       = field.find('.autocomplete-list');
+    var template   = field.find('.fogg-template').html();
+    var list_class = 'autocomplete-id-';
+
+    input.autocomplete({
+      source : data,
+      minLength : 3,
+      select : select
+    }).keypress(function(e) {
+      var code = (e.keyCode ? e.keyCode : e.which);
+      if(code == 13) {
+        return false;
+      }
+    });
+
+    list.on('click', 'li .remove', remove);
+
+    function select(e, object) {
+      var item = object.item;
+      var html = template;
+
+      if(list.find('li.' + list_class + item.id).length) {
+        resetInput();
+        return;
+      }
+
+      list.append(html);
+      var element = list.find('li:last');
+      element.addClass(list_class + item.id);
+      element.find('.value').html(item.value);
+      element.find('.title').html(item.title);
+      element.find('input').val(item.id);
+
+      resetInput();
+    }
+
+    function remove(e) {
+      var target = $(e.target);
+      target.closest('li').remove();
+    }
+
+    function resetInput() {
+      setTimeout(function() {
+        input.val('');
+      }, 1);
+    }
+  });
+};
+
+
+
 var script = {
   init : function() {
-    $('.translatable-container').translatable();
-    $('.api-delete').onDelete();
-    $('.splitter').evenHeight();
-    $('.media-field').mediaField();
-    $('.api-mark').marker();
+    $('.fogg-wrap .duplicatable-field').foggDuplicate();
+    $('.fogg-wrap .translatable-container').foggTranslatable();
+    $('.fogg-wrap .delete').foggOnDelete();
+    $('.fogg-wrap .splitter').foggEvenHeight();
+    $('.fogg-wrap .media-field').foggMediaField();
+    $('.fogg-wrap .api-mark').foggMarker();
+    $('.fogg-wrap .autocomplete-field').foggAutoComplete();
   }
 };
 

@@ -6,6 +6,7 @@ use GoBrave\Util\CaseConverter;
 use GoBrave\Util\Renderer;
 use GoBrave\Fogg\Config;
 use GoBrave\Fogg\Admin\Session;
+use GoBrave\Fogg\System\Response;
 
 class Router
 {
@@ -19,7 +20,6 @@ class Router
   private $case_converter;
   private $renderer;
   private $session;
-
 
   private $route;
   private $vars;
@@ -36,7 +36,7 @@ class Router
   }
 
   public function route(Request $request) {
-    if(!$request->get('page')) {
+    if(!$request->get('page') OR !isset($this->routes[$request->get('page')])) {
       return;
     }
 
@@ -60,7 +60,7 @@ class Router
     $this->wp->add_action('admin_init', function() use($request) {
 
       $controller = $this->route->controllerClass();
-      $controller = new $controller($this->session);
+      $controller = new $controller($this->session, $this->renderer);
 
       $controller->runBeforeFilters($this->case_converter->snakeToCamel($this->route->method(), true));
       $this->response = $controller->{$this->route->method()}($request);

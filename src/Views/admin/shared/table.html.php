@@ -1,23 +1,23 @@
 <table class="wp-list-table widefat fixed pages" cellspacing="0">
   <thead>
-    <?php $this->render('/admin/shared/table_header', array('cols' => @$cols)); ?>
+    <?= $this->render('/admin/shared/table_header', ['cols' => @$cols]); ?>
   </thead>
   <tfoot>
-    <?php $this->render('/admin/shared/table_header', array('cols' => @$cols)); ?>
+    <?= $this->render('/admin/shared/table_header', ['cols' => @$cols]); ?>
   </tfoot>
   <tbody id="the-list">
     <?php if(count($models) > 0) : ?>
       <?php foreach($models as $key => $model) : ?>
-        <tr class="<?php echo ($key % 2 === 0 ? 'alternate' : ''); ?>" valign="top">
+        <tr class="<?= ($key % 2 === 0 ? 'alternate' : ''); ?>" valign="top">
           <td></td>
           <td class="post-title page-title column-title">
-            <strong><a class="row-title" href="?page=<?php echo $_GET['page']; ?>&<?= \App\Api\AdminRouter::KEY_EDIT; ?>=<?php echo $model->id; ?>" title="Redigera <?php echo $model->t('title'); ?>"><?php echo ($model->t('title') ?: '(titel saknas)'); ?></a></strong>
+            <strong><a class="row-title" href="?page=<?= $_GET['page']; ?>&<?= $route::TYPE_EDIT; ?>=1&fogg-id=<?= $model->id; ?>" title="Redigera <?= $model->t('title'); ?>"><?= ($model->t('title') ?: '(titel saknas)'); ?></a></strong>
             <div class="row-actions">
               <span class="edit">
-                <a href="?page=<?php echo $_GET['page']; ?>&<?= \App\Api\AdminRouter::KEY_EDIT; ?>=<?php echo $model->id; ?>" title="Redigera denna post">Redigera</a>
+                <a href="?page=<?= $_GET['page']; ?>&<?= $route::TYPE_EDIT; ?>=1&fogg-id=<?= $model->id; ?>" title="Redigera denna post">Redigera</a>
               </span>
               <span class="delete">
-                | <a class="submitdelete <?= \App\Api\AdminRouter::KEY_DELETE; ?>" title="Flytta denna post till papperskorgen" href="?page=<?php echo $_GET['page']; ?>&<?= \App\Api\AdminRouter::KEY_DELETE; ?>=<?php echo $model->id; ?>">Ta bort</a> | 
+                | <a class="submitdelete <?= $route::TYPE_DELETE; ?>" title="Flytta denna post till papperskorgen" href="?page=<?= $_GET['page']; ?>&<?= $route::TYPE_DELETE; ?>=1&fogg-id=<?= $model->id; ?>">Ta bort</a>
               </span>
             </div>
           </td>
@@ -31,7 +31,7 @@
         </tr>
       <?php endforeach; ?>
     <?php else : ?>
-      <tr><td colspan="2">Hittade inga <?php echo strtolower($route->resource()->plural); ?></td></tr>
+      <tr><td colspan="2">Hittade inga <?= strtolower($route->resource()->plural); ?></td></tr>
     <?php endif; ?>
   </tbody>
 </table>

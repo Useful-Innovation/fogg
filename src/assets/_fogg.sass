@@ -45,20 +45,17 @@
         background: #ffffe0
         border-color: #e6db55
 
-  .button.delete
+  .button.button-delete
     $bg : #E87474
     background: $bg
     border-color: darken($bg, 15%)
     color: white
     font-weight: normal
+    box-shadow: inset 0 1px 0 rgba(255,100,100,.5),0 1px 0 rgba(0,0,0,.15)
     &:hover
       background: darken($bg, 5%)
       border-color: darken($bg, 20%)
       color: white
-
-
-  .button
-    box-shadow: inset 0 1px 0 rgba(120,200,230,.5),0 1px 0 rgba(0,0,0,.15)
 
   .postbox
     h3
@@ -70,12 +67,20 @@
     .text-field
       input[type=text]
         width: 100%
+      &.text-field-compressed
+        clear: both
+        p
+          float: left
+          width: 100px
+          margin: 3px 0 0 0
+        input[type=text]
+          width: 150px !important
+          
     .select-field
       select
         width: 100%
     .media-field
       figure
-        width: 250px
         text-align: center
         margin: 0 0 10px 0
         padding: 10px
@@ -83,13 +88,69 @@
         background: #fafafa
         line-height: 0
         img
-          max-width: 250px
-          max-height: 250px
+          max-width: 100px
+          max-height: 100px
           line-height: 0
+      button
+        height: 24px
+        line-height: 22px
+        padding: 0 5px 1px
+        font-size: 12px
     .textarea-field
       textarea
         width: 100%
         min-height: 100px
+    .radio-field
+      .radio-button
+        margin-right: 15px
+    .autocomplete-field
+      .autocomplete-list
+        li
+          background: rgba(0,0,0,0.1)
+          border: 1px solid rgba(0,0,0,0.1)
+          padding: 7px 7px 7px 10px
+          .title
+            font-size: 80%
+          .remove
+            cursor: pointer
+            float: right
+    .duplicatable-field
+      .fogg-remove-media
+        display: none
+      .groups
+        .group
+          margin-top: 20px
+          border-top: 1px solid #e0e0e0
+          padding-top: 20px
+          &:first-child
+            margin-top: 0
+            border-top: 0
+            padding-top: 0
+      .remove-group-container
+        overflow: hidden
+        margin: -34px 0 0 0
+        float: right
+      .duplicatable-button
+        float: right
+        background: none
+        border: none
+        box-shadow: none
+        margin: 10px 0
+        &.remove-group
+          color: red
+        &.duplicate
+          color: green
+      .duplicatable-footer
+        clear: both
+        overflow: hidden
+        border-top: 1px solid #e0e0e0
+      .select-field
+        select
+          width: calc(100% - 125px)
+      .text-field
+        input[type=text]
+          width: calc(100% - 125px)
+
 
   .translatable-container
     $bg : #F7F7F7

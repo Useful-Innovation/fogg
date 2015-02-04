@@ -1,4 +1,4 @@
-<?php namespace GoBrave\Fogg\Admin;
+<?php namespace GoBrave\Fogg\System;
 
 class Response
 {

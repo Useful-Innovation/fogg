@@ -1,6 +1,7 @@
 <?php namespace GoBrave\Fogg\Admin;
 
 use GoBrave\Fogg\System\Controller as System;
+use GoBrave\Fogg\System\Response;
 
 class Controller extends System
 {

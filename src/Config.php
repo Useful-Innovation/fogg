@@ -7,6 +7,7 @@ class Config
   private $admin_page_name;
   private $controller_suffix;
   private $root_path;
+  private $views_path;
 
   public function __construct($config = []) {
     foreach(get_object_vars($this) as $key => $value) {
@@ -34,5 +35,9 @@ class Config
 
   public function rootPath() {
     return $this->root_path;
+  }
+
+  public function viewsPath() {
+    return $this->views_path;
   }
 }

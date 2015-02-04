@@ -6,15 +6,35 @@ class Request
   private $post;
 
   public function __construct($get, $post) {
-    $this->get  = $get;
-    $this->post = $post;
+    $this->get  = $this->convertStringsToDataTypes($get);
+    $this->post = $this->convertStringsToDataTypes($post);
   }
 
-  public function get($key) {
+  private function convertStringsToDataTypes($arr) {
+    foreach($arr as $key => $var) {
+      if($var === '') {
+        $arr[$key] = null;
+      } else if(is_numeric($var)) {
+        // if the numeric value has a '.' in it, it's a float
+        $arr[$key] = strpos($var, '.') === false ? intval($var) : floatval($var);
+      } else if(is_array($var)) {
+        $arr[$key] = $this->convertStringsToDataTypes($var);
+      }
+    }
+    return $arr;
+  }
+
+  public function get($key = false) {
+    if($key === false) {
+      return $this->get;
+    }
     return $this->getVar('get', $key);
   }
 
-  public function post($key) {
+  public function post($key = false) {
+    if($key === false) {
+      return $this->post;
+    }
     return $this->getVar('post', $key);
   }
 
