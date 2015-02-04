@@ -1,6 +1,7 @@
 {
   "name": "gobrave/fogg",
   "repositories": [ { "type": "composer", "url": "http://satis.goingbrave.se" } ],
+  "description" : "A package to make an effective starting point for a CRUD in Wordpress backend + routes in front-end",
   "require-dev": {
     "phpunit/phpunit": "4.0.*"
   },
