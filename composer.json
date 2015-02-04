@@ -1,5 +1,11 @@
 {
   "name": "gobrave/fogg",
+  "authors" : [
+    {
+      "name" : "Emil Rosendahl",
+      "email" : "emil@gobrave.se"
+    }
+  ],
   "repositories": [ { "type": "composer", "url": "http://satis.goingbrave.se" } ],
   "description" : "A package to make an effective starting point for a CRUD in Wordpress backend + routes in front-end",
   "require-dev": {
