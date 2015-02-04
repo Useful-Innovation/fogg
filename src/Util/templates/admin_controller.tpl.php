@@ -1,7 +1,7 @@
 <?= $php; ?> namespace <?= $namespace; ?>;
 
-use App\Api\System\AdminController;
-use App\Api\Models\<?= $model_name; ?>;
+use App\Fogg\System\AdminController;
+use App\Fogg\Models\<?= $model_name; ?>;
 
 class <?= $class; ?> extends AdminController
 {

@@ -31,12 +31,12 @@ $fogg = new GoBrave\Fogg\Fogg(
     'root_path'         => GR_APP_PATH . '/Fogg',
     'admin_page_name'   => 'Fogg',
     'controller_suffix' => 'Controller',
-    'views_path'        => GR_APP_PATH  . '/templates/api'
+    'views_path'        => GR_APP_PATH  . '/templates/fogg'
   ]),
   new GoBrave\Util\Wp(),
   new GoBrave\Util\CaseConverter(),
   new GoBrave\Fogg\System\Renderer([
-      GR_APP_PATH  . '/templates/api',
+      GR_APP_PATH  . '/templates/fogg',
       GR_ROOT_PATH . '/vendor/gobrave/fogg/src/Views'
     ], 'html'
   )

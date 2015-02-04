@@ -1,4 +1,4 @@
-<?php namespace App\Api\System;
+<?php namespace App\Fogg\System;
 
 use GoBrave\Fogg\System\Model as Fogg;
 

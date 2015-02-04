@@ -1,7 +1,6 @@
-<?php namespace App\Api\System;
+<?php namespace App\Fogg\System;
 
 use GoBrave\Fogg\Front\Controller as Fogg;
-use App\Api\Models\Language;
 
 class FrontController extends Fogg
 {

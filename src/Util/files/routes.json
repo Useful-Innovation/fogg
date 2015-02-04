@@ -11,7 +11,7 @@
     "/foggs" : {
       "name"       : "foggs",
       "type"       : "GET",
-      "controller" : "FoggssController",
+      "controller" : "FoggsController",
       "method"     : "foggs"
     }
   }
