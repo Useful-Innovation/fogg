@@ -126,7 +126,11 @@ class Router
 
     $res = new \stdClass();
     $res->vars = $response->vars();
-    $res->template = 'fogg/' . $method;
+    $res->template = implode('/', [
+      'fogg',
+      $this->case_converter->camelToSnake($route->getController()),
+      $this->case_converter->camelToSnake($route->getMethod())
+    ]);
 
 
     $this->wp->add_filter('body_class', function($classes) use($route) {
