@@ -282,7 +282,7 @@ var script = {
   init : function() {
     $('.fogg-wrap .duplicatable-field').foggDuplicate();
     $('.fogg-wrap .translatable-container').foggTranslatable();
-    $('.fogg-wrap .delete').foggOnDelete();
+    $('.fogg-wrap .fogg-delete').foggOnDelete();
     $('.fogg-wrap .splitter').foggEvenHeight();
     $('.fogg-wrap .media-field').foggMediaField();
     $('.fogg-wrap .api-mark').foggMarker();
