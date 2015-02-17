@@ -126,7 +126,7 @@ class Router
 
     $res = new \stdClass();
     $res->vars = $response->vars();
-    $res->template = 'api/' . $method;
+    $res->template = 'fogg/' . $method;
 
 
     $this->wp->add_filter('body_class', function($classes) use($route) {
