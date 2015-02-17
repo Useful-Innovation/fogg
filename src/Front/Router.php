@@ -128,7 +128,7 @@ class Router
     $res->vars = $response->vars();
     $res->template = implode('/', [
       'fogg',
-      $this->case_converter->camelToSnake($route->getController()),
+      str_replace('_controller', '', $this->case_converter->camelToSnake($route->getController())),
       $this->case_converter->camelToSnake($route->getMethod())
     ]);
 
