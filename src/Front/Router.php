@@ -108,7 +108,7 @@ class Router
     $controller = $this->config->baseNamespace() . '\\Controllers\\' . $route->getController();
     $method     = $route->getMethod();
     $vars       = $route->getRouteVars($vars);
-    $controller = new $controller();
+    $controller = new $controller($this->renderer);
 
     $controller->runBeforeFilters($this->case_converter->snakeToCamel($method, true));
     if(!method_exists($controller, $method)) {
