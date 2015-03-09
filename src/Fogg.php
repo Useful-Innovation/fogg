@@ -76,4 +76,8 @@ class Fogg
   public function router() {
     return $this->router;
   }
+
+  public function getRenderer() {
+    return $this->renderer;
+  }
 }
