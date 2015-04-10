@@ -19,6 +19,7 @@ class Session
 
   public function message($type, $message) {
     $this->session[$type][] = $message;
+    $this->update();
   }
 
   public function notice($message) {

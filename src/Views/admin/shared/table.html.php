@@ -16,7 +16,7 @@
               <span class="edit">
                 <a href="?page=<?= $_GET['page']; ?>&<?= $route::TYPE_EDIT; ?>=1&fogg-id=<?= $model->id; ?>" title="Redigera denna post">Redigera</a>
               </span>
-              <span class="delete">
+              <span class="delete button-delete">
                 | <a class="submitdelete <?= $route::TYPE_DELETE; ?>" title="Flytta denna post till papperskorgen" href="?page=<?= $_GET['page']; ?>&<?= $route::TYPE_DELETE; ?>=1&fogg-id=<?= $model->id; ?>">Ta bort</a>
               </span>
             </div>
