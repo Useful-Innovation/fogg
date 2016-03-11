@@ -56,8 +56,11 @@ class Route
     return $this->tags;
   }
 
-  public function getPath($params) {
+  public function getPath($params, $path) {
     $parts = explode('/', trim($this->uri, '/'));
+    if(!empty($path)){
+      array_unshift($parts , $path);
+    }
     foreach($parts as $key => $part) {
       if($this->uriSegmentIsTag($part, $this->getTags())) {
         $parts[$key] = array_shift($params);

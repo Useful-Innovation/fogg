@@ -22,6 +22,7 @@ class Router
     $this->wp             = $wp;
     $this->case_converter = $case_converter;
     $this->renderer       = $renderer;
+    $this->path           = $wp->get_blog_details()->path;
 
     $this->setupRewrites($this->routes);
   }
@@ -85,17 +86,17 @@ class Router
 
   public function route($vars) {
     $uri = $_SERVER['REQUEST_URI'];
-    $blog = $this->wp->get_blog_details();
+
     if(strpos($uri, '?') !== false) {
       $uri = substr($uri, 0, strpos($uri, '?'));
     }
     if(strpos($uri, '#') !== false) {
       $uri = substr($uri, 0, strpos($uri, '#'));
     }
-    if(strpos($uri, $blog->path) !== false){
-      $uri = str_replace(rtrim($blog->path, '/'), '', $uri);
+    if(strpos($uri, $this->path) !== false){
+      $uri = str_replace(rtrim($this->path, '/'), '', $uri);
     }
-    
+
     $route = null;
     foreach($this->routes as $tmp) {
       if($tmp->match($uri, $vars, $_SERVER['REQUEST_METHOD'])) {
@@ -157,6 +158,6 @@ class Router
       return false;
     }
 
-    return $route->getPath($params);
+    return $route->getPath($params, trim($this->path, '/'));
   }
 }
