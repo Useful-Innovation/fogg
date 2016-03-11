@@ -84,15 +84,18 @@ class Router
   }
 
   public function route($vars) {
-
     $uri = $_SERVER['REQUEST_URI'];
+    $blog = $this->wp->get_blog_details();
     if(strpos($uri, '?') !== false) {
       $uri = substr($uri, 0, strpos($uri, '?'));
     }
     if(strpos($uri, '#') !== false) {
       $uri = substr($uri, 0, strpos($uri, '#'));
     }
-
+    if(strpos($uri, $blog->path) !== false){
+      $uri = str_replace(rtrim($blog->path, '/'), '', $uri);
+    }
+    
     $route = null;
     foreach($this->routes as $tmp) {
       if($tmp->match($uri, $vars, $_SERVER['REQUEST_METHOD'])) {
