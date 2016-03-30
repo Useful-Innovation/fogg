@@ -13,7 +13,7 @@ trait Translation
 
     $object->{$relation_key} = $parent->id;
     foreach($translation as $key => $value) {
-      $object->{$key} = $value;
+      $object->{$key} = stripslashes($value);
     }
 
     $object->save();
