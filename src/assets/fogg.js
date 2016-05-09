@@ -11,14 +11,16 @@ $.fn.foggTranslatable = function() {
 
   items.find('.translatable').hide();
 
-  function showTab(tabs, element, li) {
-    tabs.find('li').removeClass('active');
-    element.find('.translatable').hide();
-
-    var key = li.find('a').attr('href').replace('#', '');
-
-    element.find('.' + key).show();
-    li.addClass('active');
+  function showTab(tabs, element, li, init) {
+    if(li.find('a').attr('href') !== undefined){
+      if(!init){
+        $('.translatable-tabs li').removeClass('active');
+      }
+      $('.'+element.attr('class')).find('.translatable').hide();
+      var key = li.find('a').attr('href').replace('#', '');
+      $('.'+element.attr('class')).find('.' + key).show();
+      li.addClass('active');
+    }
   }
 
   return items.each(function() {
@@ -28,12 +30,12 @@ $.fn.foggTranslatable = function() {
     tabs.find('li').each(function() {
       $(this).find('a').on('click', function(e) {
         e.preventDefault();
-        var li = $(e.target).closest('li');
-        showTab(tabs, element, li);
+        var li = $('.' + $(this).closest('li').attr('class'));
+        showTab(tabs, element, li, false);
       });
     });
 
-    showTab(tabs, element, tabs.find('li:first'));
+    showTab(tabs, element, tabs.find('li:first'), true);
   });
 };
 
