@@ -5,7 +5,8 @@
       $id,
       [
         'media_buttons' => false,
-        'textarea_name' => $name
+        'textarea_name' => $name,
+        'editor_height' => 400
       ]
     );
   ?>
