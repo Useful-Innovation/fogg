@@ -148,6 +148,7 @@ class Router
 
   public function namedRoute($name, array $params) {
     $route = null;
+    $uri = $_SERVER['REQUEST_URI'];
     foreach($this->routes as $tmp) {
       if($tmp->getName() === $name) {
         $route = $tmp;
@@ -157,7 +158,9 @@ class Router
     if(!$route) {
       return false;
     }
-
-    return $route->getPath($params, trim($this->path, '/'));
+    if(strpos($uri, $this->path) !== false){
+      return $route->getPath($params, trim($this->path, '/')); 
+    }
+    return $route->getPath($params, '');
   }
 }
