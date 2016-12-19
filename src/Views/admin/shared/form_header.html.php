@@ -1,4 +1,4 @@
-<form method="post" class="fogg-form" id="poststuff">
+<form method="post" class="fogg-form" id="poststuff" enctype="multipart/form-data">
 
   <?php if($route->isEdit() OR $route->isCreate()) : ?>
     <p>

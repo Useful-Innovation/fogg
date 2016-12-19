@@ -41,7 +41,7 @@ class Fogg
     if($this->wp->is_admin()) {
       $this->wp->wp_enqueue_media();
       $this->router = new Admin\Router($this->readRoutes('admin', 'resource'), $this->config, $this->wp, $this->case_converter, $this->renderer);
-      $this->router->route(new Admin\Request($_GET, $_POST));
+      $this->router->route(new Admin\Request($_GET, $_POST, $_FILES));
     } else {
       $this->router = new Front\Router(
         $this->readPublicRoutes('public'),

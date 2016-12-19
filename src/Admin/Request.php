@@ -4,10 +4,12 @@ class Request
 {
   private $get;
   private $post;
+  private $files;
 
-  public function __construct($get, $post) {
+  public function __construct($get, $post, $files) {
     $this->get  = $this->convertStringsToDataTypes($get);
     $this->post = $this->convertStringsToDataTypes($post);
+    $this->files = $files;
   }
 
   private function convertStringsToDataTypes($arr) {
@@ -36,6 +38,13 @@ class Request
       return $this->post;
     }
     return $this->getVar('post', $key);
+  }
+
+  public function files($key = false) {
+    if($key === false) {
+      return $this->files;
+    }
+    return $this->getVar('files', $key);
   }
 
   private function getVar($var, $key) {
