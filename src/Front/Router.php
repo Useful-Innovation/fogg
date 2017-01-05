@@ -14,7 +14,7 @@ class Router
   private $case_converter;
   private $renderer;
 
-  private $route_part = '([A-Za-z0-9-]+)';
+  private $route_part = '([A-Za-z0-9\-\_]+)';
 
   public function __construct(array $routes, Config $config, IWP $wp, CaseConverter $case_converter, Renderer $renderer) {
     $this->routes         = $this->createRoutes($routes);

@@ -6,7 +6,7 @@ class Route
   private $tags;
   private $options;
 
-  const TAG_REWRITE = '([A-Za-z0-9-]+)';
+  const TAG_REWRITE = '([A-Za-z0-9\-\_]+)';
 
   public function __construct($uri, array $options) {
     $this->uri     = $uri;
