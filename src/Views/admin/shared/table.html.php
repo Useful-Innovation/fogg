@@ -8,10 +8,13 @@
   <tbody id="the-list">
     <?php if(count($models) > 0) : ?>
       <?php foreach($models as $key => $model) : ?>
+        <?php if(isset($extra_value)): ?>
+          <?php $parent = $model->{$extra_value}(); ?>
+        <?php endif; ?>
         <tr class="<?= ($key % 2 === 0 ? 'alternate' : ''); ?>" valign="top">
           <td></td>
           <td class="post-title page-title column-title">
-            <strong><a class="row-title" href="?page=<?= $_GET['page']; ?>&<?= $route::TYPE_EDIT; ?>=1&fogg-id=<?= $model->id; ?>" title="Redigera <?= $model->t('title'); ?>"><?= ($model->t('title') ?: '(titel saknas)'); ?></a></strong>
+            <strong><a class="row-title" href="?page=<?= $_GET['page']; ?>&<?= $route::TYPE_EDIT; ?>=1&fogg-id=<?= $model->id; ?><?= isset($extra_key) && isset($parent) ? '&'.$extra_key.'='.$parent->id : ''; ?>" title="Redigera <?= $model->t('title'); ?>"><?= ($model->t('title') ?: '(titel saknas)'); ?></a></strong>
             <div class="row-actions">
               <span class="edit">
                 <a href="?page=<?= $_GET['page']; ?>&<?= $route::TYPE_EDIT; ?>=1&fogg-id=<?= $model->id; ?>" title="Redigera denna post">Redigera</a>
