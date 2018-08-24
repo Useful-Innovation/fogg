@@ -15,6 +15,7 @@ trait Image
     }
 
     $url = ($src ? $src[0] : false);
+    $url = preg_replace('/\/sites\/\d/', '', $url);
 
     Util::restoreBlogToCurrent();
     return $url;
