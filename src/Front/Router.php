@@ -30,6 +30,8 @@ class Router
 
     private function setupRewrites($routes)
     {
+        global $wp_rewrite;
+
         $tags = $this->getRewriteTags($routes);
 
         foreach ($tags as $tag) {
@@ -51,6 +53,10 @@ class Router
 
             $query = 'index.php?' . implode('&', $segments);
             $query = count($tags) ? $query . '&' . implode('&', $tags) : $query;
+
+            if (is_array(get_option('rewrite_rules')) && !array_key_exists($rule, get_option('rewrite_rules'))) {
+                $wp_rewrite->flush_rules(true);
+            }
 
             add_rewrite_rule($rule, $query, 'top');
         }
